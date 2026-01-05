@@ -31,12 +31,16 @@ fn take_and_give_back(str1 : String){
 }
 
 
+
+
+/*
+
 String::from → owner A
 move → owner B
 move → owner C
 scope ends → DROP (once)
 
-Yes — exactly correct. Let’s be precise about where the drop happens.
+
 
 If str1 is not returned
 
@@ -118,3 +122,5 @@ scope ends → DROP (once)
 One-line rule
 
 > If a value goes out of scope without being moved, it is dropped.
+
+*/
