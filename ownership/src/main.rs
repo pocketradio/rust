@@ -29,3 +29,92 @@ fn take_and_give_back(str1 : String){
 
     str1 // returns back to fn call
 }
+
+
+String::from → owner A
+move → owner B
+move → owner C
+scope ends → DROP (once)
+
+Yes — exactly correct. Let’s be precise about where the drop happens.
+
+If str1 is not returned
+
+fn take_and_drop(str1: String) {
+    println!("{str1}");
+}
+
+What happens:
+
+1. Ownership of the String moves into str1
+
+
+2. Function ends
+
+
+3. str1 goes out of scope
+
+
+4. Rust calls Drop::drop
+
+
+
+What drop actually does
+
+Heap: frees the allocated string buffer
+
+Stack: the String struct itself (pointer, len, capacity) is popped
+
+
+So yes:
+
+> Heap memory is freed, and the stack slot is removed.
+
+
+
+
+---
+
+Why returning prevents drop
+
+fn take_and_give_back(str1: String) -> String {
+    str1
+}
+
+str1 is moved at the return expression
+
+A moved value is not dropped
+
+Ownership transfers to the caller
+
+Caller’s variable becomes responsible for dropping later
+
+
+
+---
+
+Important mental model
+
+drop runs once
+
+It runs for the final owner
+
+Moves just change who the owner is
+
+
+
+---
+
+Ownership lifecycle (visual)
+
+String::from → owner A
+move → owner B
+move → owner C
+scope ends → DROP (once)
+
+
+---
+
+One-line rule
+
+> If a value goes out of scope without being moved, it is dropped.
