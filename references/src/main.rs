@@ -3,7 +3,7 @@ fn main() {
     let len = calculate(&s1);
     println!("the length of string {s1} is {len}");
 
-    let s = String::from("hi");
+    let mut s = String::from("hi");
     // change(&s);
     change_mut(&mut s); // mutable reference unlike line 7 -> so the change_mut fn will mutate the value of s.
 }
@@ -18,7 +18,7 @@ fn change(str1: &String) {
     // above line : throws error. because we're modifying a borrowed object.
 }
 
-fn change_mut(str1: &String) {
+fn change_mut(_str1: &mut String) {
     str1.push_str("world");
 }
 
