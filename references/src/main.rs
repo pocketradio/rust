@@ -19,7 +19,7 @@ fn change(str1: &String) {
 }
 
 fn change_mut(_str1: &mut String) {
-    str1.push_str("world");
+    _str1.push_str("world");
 }
 
 // Note : you can have only 1 mutable reference to a value. eg. doing r1 = &mut s; and r2 = &mut s -> error.
